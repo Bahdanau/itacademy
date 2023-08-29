@@ -35,9 +35,11 @@ public class ConsoleSortingReader implements SortingReader {
                 }
             }
             System.out.println("Введено типов сортировок: " + sortingList.size());
+            System.out.println(sortingList.stream().map(Sorting::getComparator).reduce((t1, t2) -> 0, Comparator::thenComparing));
             return sortingList.stream()
                     .map(Sorting::getComparator)
                     .reduce((t1, t2) -> 0, Comparator::thenComparing);
+
         } catch (final RuntimeException ex) {
             throw new SortingReaderException("Ошибка чтения сортировки для транспорта", ex);
         }

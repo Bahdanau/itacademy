@@ -1,5 +1,6 @@
 package by.itacademy;
 
+import by.itacademy.reader.TransportReaderException;
 import by.itacademy.reader.impl.FileTransportReader;
 import by.itacademy.sorting.SortingReader;
 import by.itacademy.sorting.impl.ConsoleSortingReader;
@@ -9,7 +10,10 @@ import by.itacademy.writer.TransportDestination;
 import by.itacademy.writer.TransportWriter;
 import by.itacademy.writer.impl.FileTransportWriter;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,6 +22,7 @@ public class TransportDataApplication {
         System.out.println("Старт программы Диагностика транспорта");
 
         try {
+
             final FileTransportReader reader = new FileTransportReader("transport.json");
             final List<Transport> transports = reader.read();
             final List<InvalidTransport> invalidTransport = reader.getInvalidTransport();
@@ -37,4 +42,5 @@ public class TransportDataApplication {
         }
         System.out.println("Конец программы Диагностика транспорта");
     }
+
 }

@@ -7,8 +7,8 @@ import java.util.function.Function;
 
 public enum SortingType {
 
-    TYPE(Transport::getTransportType),
-    MODEL(Transport::getTransportModel),
+    TYPE(Transport::getType),
+    MODEL(Transport::getModel),
 
     PRICE(Transport::getPrice);
 

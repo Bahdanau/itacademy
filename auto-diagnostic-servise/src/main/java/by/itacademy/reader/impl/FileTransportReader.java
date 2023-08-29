@@ -1,5 +1,6 @@
 package by.itacademy.reader.impl;
 
+import by.itacademy.TransportDataApplication;
 import by.itacademy.reader.TransportReader;
 import by.itacademy.reader.TransportReaderException;
 import by.itacademy.transports.InvalidTransport;
@@ -8,7 +9,9 @@ import by.itacademy.transports.TransportType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,11 +19,12 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileTransportReader implements TransportReader {
-    final static String REGEX_MODEL = "^[a-zA-Z]((\\s|-)?[a-zA-Z0-9])*$";
+    final String REGEX_MODEL = "^[a-zA-Z]((\\s|-)?[a-zA-Z0-9])*$";
     private static String fileName;
     final StringBuilder stringBuilder = new StringBuilder();
     final List<InvalidTransport> invalidTransports = new ArrayList<>();
     final List<Transport> transports = new ArrayList<>();
+
 
     public FileTransportReader(final String fileName) {
         this.fileName = fileName;
@@ -42,11 +46,11 @@ public class FileTransportReader implements TransportReader {
 
             return transports;
         } catch (IOException ex) {
-            throw new TransportReaderException("Ошибка при чтении файла " + fileName, ex);
+            throw new TransportReaderException("Ошибка при чтении файла " + fileName);
         } catch (final IllegalArgumentException ex) {
-            throw new TransportReaderException("Ошибка определения типа транспорта", ex);
+            throw new TransportReaderException("Ошибка определения типа транспорта");
         } catch (final RuntimeException ex) {
-            throw new TransportReaderException("Ошибка анализа прочтенного файла", ex);
+            throw new TransportReaderException("Ошибка анализа прочтенного файла");
         }
     }
 

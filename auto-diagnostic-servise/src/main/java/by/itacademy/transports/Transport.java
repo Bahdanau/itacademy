@@ -6,17 +6,17 @@ public class Transport {
     private final String model;
     private final int price;
 
-    public Transport(String type, String modell, int price) {
+    public Transport(String type, String model, int price) {
         this.type = type;
-        this.model = modell;
+        this.model = model;
         this.price = price;
     }
 
-    public String getTransportType() {
+    public String getType() {
         return type;
     }
 
-    public String getTransportModel() {
+    public String getModel() {
         return model;
     }
 
