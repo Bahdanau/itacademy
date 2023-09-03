@@ -1,17 +1,14 @@
 package by.itacademy.reader.impl;
 
-import by.itacademy.TransportDataApplication;
 import by.itacademy.reader.TransportReader;
 import by.itacademy.reader.TransportReaderException;
 import by.itacademy.transports.InvalidTransport;
-import by.itacademy.transports.Transport;
+import by.itacademy.transports.ProcessedTransport;
 import by.itacademy.transports.TransportType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class FileTransportReader implements TransportReader {
     private static String fileName;
     final StringBuilder stringBuilder = new StringBuilder();
     final List<InvalidTransport> invalidTransports = new ArrayList<>();
-    final List<Transport> transports = new ArrayList<>();
+    final List<ProcessedTransport> processedTransports = new ArrayList<>();
 
 
     public FileTransportReader(final String fileName) {
@@ -32,19 +29,19 @@ public class FileTransportReader implements TransportReader {
     }
 
     @Override
-    public List<Transport> read() throws TransportReaderException {
-
+    public List<ProcessedTransport> read() throws TransportReaderException {
         try {
             String contents = new String((Files.readAllBytes(Paths.get(fileName))));
             JSONArray array = new JSONArray(contents);
+
             for (int index = 0; index < array.length(); index++) {
                 stringBuilder.append(array.get(index) + ".");
             }
-            String[] words = stringBuilder.toString().split("\\.");
 
+            String[] words = stringBuilder.toString().split("\\.");
             processingJson(words);
 
-            return transports;
+            return processedTransports;
         } catch (IOException ex) {
             throw new TransportReaderException("Ошибка при чтении файла " + fileName);
         } catch (final IllegalArgumentException ex) {
@@ -53,21 +50,20 @@ public class FileTransportReader implements TransportReader {
             throw new TransportReaderException("Ошибка анализа прочтенного файла");
         }
     }
-
     @Override
     public List<InvalidTransport> getInvalidTransport() {
         return invalidTransports;
     }
 
     private void processingJson(String[] words) {
-
         for (String word : words) {
             JSONObject jsonObject = new JSONObject(word);
             final TransportType transportType = TransportType.valueOf(jsonObject.getString("type").toUpperCase());
             final String model = jsonObject.getString("model");
             final Integer price = transportType.getPrice();
+
             if ((Pattern.matches(REGEX_MODEL, model))) {
-                transports.add(new Transport(transportType.name().toLowerCase(), model, price));
+                processedTransports.add(new ProcessedTransport(transportType.name().toLowerCase(), model, price));
             } else {
                 invalidTransports.add(new InvalidTransport(transportType.name().toLowerCase(), model));
             }

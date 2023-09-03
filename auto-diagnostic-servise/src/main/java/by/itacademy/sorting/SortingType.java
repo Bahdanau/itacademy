@@ -1,24 +1,24 @@
 package by.itacademy.sorting;
 
-import by.itacademy.transports.Transport;
+import by.itacademy.transports.ProcessedTransport;
 
 import java.util.Comparator;
 import java.util.function.Function;
 
 public enum SortingType {
 
-    TYPE(Transport::getType),
-    MODEL(Transport::getModel),
+    TYPE(ProcessedTransport::getType),
+    MODEL(ProcessedTransport::getModel),
 
-    PRICE(Transport::getPrice);
+    PRICE(ProcessedTransport::getPrice);
 
-    private final Comparator<Transport> transportComparator;
+    private final Comparator<ProcessedTransport> transportComparator;
 
-    <T extends Comparable<T>> SortingType(final Function<Transport, T> function) {
+    <T extends Comparable<T>> SortingType(final Function<ProcessedTransport, T> function) {
         this.transportComparator = Comparator.comparing(function);
     }
 
-    public Comparator<Transport> getTransportComparator() {
+    public Comparator<ProcessedTransport> getTransportComparator() {
         return transportComparator;
     }
 }

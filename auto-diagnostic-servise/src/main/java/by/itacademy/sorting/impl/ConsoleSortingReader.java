@@ -1,7 +1,7 @@
 package by.itacademy.sorting.impl;
 
 import by.itacademy.sorting.*;
-import by.itacademy.transports.Transport;
+import by.itacademy.transports.ProcessedTransport;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ public class ConsoleSortingReader implements SortingReader {
             + "\nили нажмите 'Enter' для завершения ввода";
 
     @Override
-    public Comparator<Transport> readSorting() throws SortingReaderException {
+    public Comparator<ProcessedTransport> readSorting() throws SortingReaderException {
         try {
             final Scanner scanner = new Scanner(System.in);
             final List<Sorting> sortingList = new ArrayList<>(SortingType.values().length);

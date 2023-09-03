@@ -1,16 +1,17 @@
 package by.itacademy.transports;
 
-public class Transport {
+public class ProcessedTransport {
 
     private final String type;
     private final String model;
     private final int price;
 
-    public Transport(String type, String model, int price) {
+    public ProcessedTransport(String type, String model, int price) {
         this.type = type;
         this.model = model;
         this.price = price;
     }
+
 
     public String getType() {
         return type;

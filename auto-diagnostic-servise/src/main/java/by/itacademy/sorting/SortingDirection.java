@@ -1,6 +1,6 @@
 package by.itacademy.sorting;
 
-import by.itacademy.transports.Transport;
+import by.itacademy.transports.ProcessedTransport;
 
 import java.util.Comparator;
 import java.util.function.Function;
@@ -11,14 +11,14 @@ public enum SortingDirection {
 
     DSC(Comparator::reversed);
 
-    private final Function<Comparator<Transport>, Comparator<Transport>> comparatorTransformer;
+    private final Function<Comparator<ProcessedTransport>, Comparator<ProcessedTransport>> comparatorTransformer;//
 
 
-    SortingDirection(final Function<Comparator<Transport>, Comparator<Transport>> comparatorTransformer) {
+    SortingDirection(final Function<Comparator<ProcessedTransport>, Comparator<ProcessedTransport>> comparatorTransformer) {
         this.comparatorTransformer = comparatorTransformer;
     }
 
-    public Comparator<Transport> transform(final Comparator<Transport> comparator) {
+    public Comparator<ProcessedTransport> transform(final Comparator<ProcessedTransport> comparator) {
         return comparatorTransformer.apply(comparator);
     }
 }

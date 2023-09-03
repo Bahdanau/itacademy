@@ -1,6 +1,6 @@
 package by.itacademy.sorting;
 
-import by.itacademy.transports.Transport;
+import by.itacademy.transports.ProcessedTransport;
 
 import java.util.Comparator;
 
@@ -21,7 +21,7 @@ public class Sorting {
         return sortingDirection;
     }
 
-    public Comparator<Transport> getComparator() {
+    public Comparator<ProcessedTransport> getComparator() {
         return sortingDirection.transform(sortingType.getTransportComparator());
     }
 }
