@@ -2,9 +2,9 @@ package by.itacademy.transports;
 
 public class ProcessedTransport {
 
-    private final String type;
-    private final String model;
-    private final int price;
+    private final String type;//используется только внутри класса, нельзя изменить ссылку
+    private final String model;//используется только внутри класса, нельзя изменить ссылку
+    private final int price;//используется только внутри класса, нельзя изменить ссылку
 
     public ProcessedTransport(String type, String model, int price) {
         this.type = type;

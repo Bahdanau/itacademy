@@ -7,11 +7,11 @@ import java.util.function.Function;
 
 public enum SortingDirection {
 
-    ASC(Function.identity()),
+    ASC(Function.identity()),//вернется та же функция, которая была отправлена
 
-    DSC(Comparator::reversed);
+    DSC(Comparator::reversed);//реверс
 
-    private final Function<Comparator<ProcessedTransport>, Comparator<ProcessedTransport>> comparatorTransformer;//
+    private final Function<Comparator<ProcessedTransport>, Comparator<ProcessedTransport>> comparatorTransformer;//функциональный интерфейс преобразует один тип объекта в другой
 
 
     SortingDirection(final Function<Comparator<ProcessedTransport>, Comparator<ProcessedTransport>> comparatorTransformer) {
@@ -19,6 +19,6 @@ public enum SortingDirection {
     }
 
     public Comparator<ProcessedTransport> transform(final Comparator<ProcessedTransport> comparator) {
-        return comparatorTransformer.apply(comparator);
+        return comparatorTransformer.apply(comparator);//превращает один объект в другой
     }
 }

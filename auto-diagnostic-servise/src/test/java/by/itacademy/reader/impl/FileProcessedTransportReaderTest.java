@@ -11,24 +11,25 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileProcessedTransportReaderTest {
-    public static final String TEST_FILE_NAME = "src\\test\\resources\\test-transport.json";
-    public static final ProcessedTransport PROCESSED_TRANSPORT = new ProcessedTransport("motorcycle", "Ninja ZX-14", 10);
-    public static final InvalidTransport INVALID_TRANSPORT = new InvalidTransport("automobile", "Audi Q9!№");
+    private final static String testFileName = "src/test/resources/test-transport.json";// используется только в этом классе, ссылка не будет меняться, будет использоваться для всех объектов и принадлежит всему классу
+    private final ProcessedTransport processedTransport = new ProcessedTransport("motorcycle", "Ninja ZX-14", 10);// используется только в этом классе, ссылка не будет меняться
+    private final InvalidTransport invalidTransport = new InvalidTransport("automobile", "Audi Q9!№");// используется только в этом классе, ссылка не будет меняться
 
     @Test
-    void testRead() throws TransportReaderException {
-        final var transportReader = new FileTransportReader(TEST_FILE_NAME);
-        final var invalidTransportReader = transportReader.getInvalidTransport();
-
-        final var processedTransportsReader = transportReader.read();
-
-        assertNotNull(TEST_FILE_NAME, "File is null");
-        assertEquals(processedTransportsReader, PROCESSED_TRANSPORT);
-        assertEquals(invalidTransportReader, INVALID_TRANSPORT);
+    void testRead_fileTransport_success() throws TransportReaderException {//тест чтения файла и наполнение коллекций с последующей проверкой содержимого
+        //given
+        final FileTransportReader fileTransportReader = new FileTransportReader(testFileName);// ссылка не будет меняться
+        final List<InvalidTransport> invalidTransportReader = fileTransportReader.getInvalidTransport();// ссылка не будет меняться
+        //when
+        final List<ProcessedTransport> processedTransportsReader = fileTransportReader.read();// ссылка не будет меняться
+        //then
+        assertNotNull(testFileName, "File is null");
+        assertEquals(processedTransportsReader, processedTransport);
+        assertEquals(invalidTransportReader, invalidTransport);
     }
-    <T> void assertEquals(final List<T> content, final Object object) {
+    private <T> void assertEquals(final List<T> content, final Object object) {// используется только в этом классе, сравнивает объекты между собой
         for (Object read : content) {
-            Assertions.assertEquals(read.toString(), object.toString());
+            Assertions.assertEquals(read.toString(), object.toString());//сравнивает объекты в массиве
         }
     }
 }

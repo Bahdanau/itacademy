@@ -16,29 +16,27 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileTransportReader implements TransportReader {
-    final String REGEX_MODEL = "^[a-zA-Z]((\\s|-)?[a-zA-Z0-9])*$";
-    private static String fileName;
-    final StringBuilder stringBuilder = new StringBuilder();
-    final List<InvalidTransport> invalidTransports = new ArrayList<>();
-    final List<ProcessedTransport> processedTransports = new ArrayList<>();
-
+    private final static String REGEX_MODEL = "^[a-zA-Z]((\\s|-)?[a-zA-Z0-9])*$";//используется только внутри класса, нельзя изменить ссылку,будет использоваться для всех объектов и принадлежит всему классу, модель всегда должна проходить проверку
+    private final String fileName; //используется только внутри класса, нельзя изменить ссылку
+    private final StringBuilder stringBuilder = new StringBuilder();//используется только внутри класса, нельзя изменить ссылку
+    private final List<InvalidTransport> invalidTransports = new ArrayList<>();//используется только внутри класса, нельзя изменить ссылку
+    private final List<ProcessedTransport> processedTransports = new ArrayList<>();//используется только внутри класса, нельзя изменить ссылку
 
     public FileTransportReader(final String fileName) {
         this.fileName = fileName;
-
     }
 
     @Override
     public List<ProcessedTransport> read() throws TransportReaderException {
         try {
-            String contents = new String((Files.readAllBytes(Paths.get(fileName))));
-            JSONArray array = new JSONArray(contents);
+            final String contents = new String((Files.readAllBytes(Paths.get(fileName))));//нельзя изменить ссылку
+            final JSONArray array = new JSONArray(contents);//нельзя изменить ссылку
 
             for (int index = 0; index < array.length(); index++) {
                 stringBuilder.append(array.get(index) + ".");
             }
 
-            String[] words = stringBuilder.toString().split("\\.");
+            final String[] words = stringBuilder.toString().split("\\."); //нельзя изменить ссылку
             processingJson(words);
 
             return processedTransports;
@@ -50,6 +48,7 @@ public class FileTransportReader implements TransportReader {
             throw new TransportReaderException("Ошибка анализа прочтенного файла");
         }
     }
+
     @Override
     public List<InvalidTransport> getInvalidTransport() {
         return invalidTransports;
@@ -57,10 +56,10 @@ public class FileTransportReader implements TransportReader {
 
     private void processingJson(String[] words) {
         for (String word : words) {
-            JSONObject jsonObject = new JSONObject(word);
-            final TransportType transportType = TransportType.valueOf(jsonObject.getString("type").toUpperCase());
-            final String model = jsonObject.getString("model");
-            final Integer price = transportType.getPrice();
+            final JSONObject jsonObject = new JSONObject(word);//нельзя изменить ссылку
+            final TransportType transportType = TransportType.valueOf(jsonObject.getString("type").toUpperCase());//нельзя изменить ссылку
+            final String model = jsonObject.getString("model");//нельзя изменить ссылку
+            final Integer price = transportType.getPrice();//нельзя изменить ссылку
 
             if ((Pattern.matches(REGEX_MODEL, model))) {
                 processedTransports.add(new ProcessedTransport(transportType.name().toLowerCase(), model, price));

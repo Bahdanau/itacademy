@@ -38,3 +38,6 @@ target/
 hs_err_pid*
 replay_pid*
 auto-diagnostic-servise/.idea/
+calculator/.idea/
+auto-diagnostic-servise/src/main/resources/invalid-transport.json
+auto-diagnostic-servise/src/main/resources/processed-transport.json

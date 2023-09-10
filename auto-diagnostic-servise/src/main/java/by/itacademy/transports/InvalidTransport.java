@@ -2,8 +2,8 @@ package by.itacademy.transports;
 
 public class InvalidTransport {
 
-    private final String type;
-    private final String model;
+    private final String type;//используется только внутри класса, нельзя изменить ссылку
+    private final String model;//используется только внутри класса, нельзя изменить ссылку
 
     public InvalidTransport(String type, String model) {
         this.type = type;

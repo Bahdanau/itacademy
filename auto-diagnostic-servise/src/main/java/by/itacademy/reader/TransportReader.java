@@ -6,6 +6,7 @@ import by.itacademy.transports.ProcessedTransport;
 import java.util.List;
 
 public interface TransportReader {
-    List<ProcessedTransport> read()throws TransportReaderException;
+    List<ProcessedTransport> read() throws TransportReaderException;
+
     List<InvalidTransport> getInvalidTransport();
 }
