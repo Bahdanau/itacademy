@@ -38,3 +38,5 @@ target/
 hs_err_pid*
 replay_pid*
 auto-diagnostic-servise/.idea/
+calculator/.idea/.gitignore
+calculator/.idea/

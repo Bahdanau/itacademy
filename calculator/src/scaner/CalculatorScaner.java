@@ -2,5 +2,5 @@ package scaner;
 
 public interface CalculatorScaner {
     String nextLine();
-    Double nextInt();
+    Double nextDouble();
 }

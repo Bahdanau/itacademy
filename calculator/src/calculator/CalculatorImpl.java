@@ -40,8 +40,8 @@ public class CalculatorImpl implements Calculator {
 
     private void dataForCalculator() {
         System.out.println("Напишите первое значение");
-        firstValue = calculatorScaner.nextInt();
+        firstValue = calculatorScaner.nextDouble();
         System.out.println("Напишите второе значение");
-        secondValue = calculatorScaner.nextInt();
+        secondValue = calculatorScaner.nextDouble();
     }
 }

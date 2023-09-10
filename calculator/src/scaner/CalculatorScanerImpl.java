@@ -10,7 +10,7 @@ public class CalculatorScanerImpl implements CalculatorScaner {
     }
 
     @Override
-    public Double nextInt() {
+    public Double nextDouble() {
         return SCANNER.nextDouble();
     }
 }
